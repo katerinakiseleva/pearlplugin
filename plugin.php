@@ -9,6 +9,69 @@ Author URI: http://phoenix.sheridanc.on.ca/~ccit3676/
 /*
 * This code was taken from "http://www.wpbeginner.com/wp-tutorials/how-to-create-custom-post-types-in-wordpress/""
 */
+
+class CustomWidget extends WP_Widget {
+    public function __construct() {
+    $widget_ops    = array(
+    'classname'    => 'widget_postblock',
+    'description'  => __( 'This custom widget will show 2 posts from the cpt') );
+    parent::__construct('show_custompost', __('Sidebar Posts', 'editorial'), $widget_ops);
+               }
+
+               public function widget ( $args, $instance ) {
+
+    ?>
+<div id="widgetstyle" role="main">
+    <?php
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$wp_query = new WP_Query();
+$wp_query->query('post_type=editorial&posts_per_page=2' . '&paged=' . $paged);
+?>
+
+<?php if ($wp_query->have_posts()) : ?>
+
+               <?php while ($wp_query->have_posts()) : $wp_query->the_post(); ?>
+
+                              <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                              <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                              <div id="sidebar">
+                                <?php the_title();?>
+                                <?php the_post_thumbnail('small');?>
+                              </div>
+                  </article>
+
+               <?php endwhile; ?>
+<?php endif; ?>
+    </div>
+    <?php
+
+               }
+
+}
+
+add_action( 'widgets_init', function(){
+     register_widget( 'CustomWidget' );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Our custom post type function
 function ek_posttype() {
     register_post_type( 'editorial',
