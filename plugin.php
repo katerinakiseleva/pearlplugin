@@ -54,10 +54,10 @@ add_action( 'widgets_init', function(){
 /*
 * This code was taken from "http://www.wpbeginner.com/wp-tutorials/how-to-create-custom-post-types-in-wordpress/""
 */
-// Our custom post type function
+// Custom post type function
 function ek_posttype() {
     register_post_type( 'editorial',
-    // CPT Option
+
         array(
             'labels' => array(
                 'name' => __( 'Editorial' ),
@@ -69,10 +69,10 @@ function ek_posttype() {
         )
     );
 }
-// Hooking up our function to theme setup
+
 add_action( 'init', 'ek_posttype' );
 function ek_custom_posttype() {
-// Set UI labels for Custom Post Type
+// Setting UI labels for Custom Post Type
     $labels = array(
         'name'                => _x( 'editorial', 'Post Type General Name', 'blackpearl' ),
         'singular_name'       => _x( 'editorial', 'Post Type Singular Name', 'blackpearl' ),
@@ -88,15 +88,14 @@ function ek_custom_posttype() {
         'not_found'           => __( 'Not Found', 'blackpearl' ),
         'not_found_in_trash'  => __( 'Not found in Trash', 'blackpearl' ),
     );
+
 // Set other options for Custom Post Type
     $args = array(
         'label'               => __( 'photoshoot', 'blackpearl' ),
         'description'         => __( ' editorial news and media', 'blackpearl' ),
         'labels'              => $labels,
-        // Features this CPT supports in Post Editor
         'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
-        // You can associate this CPT with a taxonomy or custom taxonomy.
-        'taxonomies'          => array( 'genres' ),
+        'taxonomies'          => array( 'names' ),
         'hierarchical'        => false,
         'public'              => true,
         'show_ui'             => true,
