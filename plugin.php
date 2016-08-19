@@ -6,9 +6,8 @@ Description: Plugin for assignment 2
 Author: Ekaterina Kiseleva
 Author URI: http://phoenix.sheridanc.on.ca/~ccit3676/
 */
-/*
-* This code was taken from "http://www.wpbeginner.com/wp-tutorials/how-to-create-custom-post-types-in-wordpress/""
-*/
+
+// Source of the widget code - http://michaelsoriano.com/wordpress-widget-custom-post-types/
 
 class CustomWidget extends WP_Widget {
     public function __construct() {
@@ -17,8 +16,7 @@ class CustomWidget extends WP_Widget {
     'description'  => __( 'This custom widget will show 2 posts from the cpt') );
     parent::__construct('show_custompost', __('Sidebar Posts', 'editorial'), $widget_ops);
                }
-
-               public function widget ( $args, $instance ) {
+         public function widget ( $args, $instance ) {
 
     ?>
 <div id="widgetstyle" role="main">
@@ -53,25 +51,9 @@ add_action( 'widgets_init', function(){
      register_widget( 'CustomWidget' );
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+* This code was taken from "http://www.wpbeginner.com/wp-tutorials/how-to-create-custom-post-types-in-wordpress/""
+*/
 // Our custom post type function
 function ek_posttype() {
     register_post_type( 'editorial',
@@ -137,6 +119,8 @@ function ek_cpt( $query ) {
         $query->set( 'post_type', array( 'post', ' editorial' ) );
     return $query;
 }
+
+// Source of the widget code - https://premium.wpmudev.org/blog/10-awesome-shortcodes-for-your-wordpress-blog/?ench=b&utm_expid=3606929-78.ZpdulKKETQ6NTaUGxBaTgQ.1&utm_referrer=https%3A%2F%2Fwww.facebook.com%2Fl.php%3Fu%3Dhttps%253A%252F%252Fpremium.wpmudev.org%252Fblog%252F10-awesome-shortcodes-for-your-wordpress-blog%252F%26h%3DUAQE5LozT
 function intro_video($attr, $url) {
   return '<iframe src="https://www.youtube.com/embed/QOrCQ-v7C3U" frameborder="0" allowfullscreen></iframe>';
 }
